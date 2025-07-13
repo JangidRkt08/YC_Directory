@@ -1,6 +1,6 @@
 import Image from "next/image";
 import styles from "./page.module.css";
-import Searchform from "../components/Searchform";
+import Searchform from "@/components/Searchform";
 
 export default async function Home({searchParams} :{
   searchParams :Promise<{query?:string}>
@@ -9,7 +9,7 @@ export default async function Home({searchParams} :{
   const query = (await searchParams).query
   return (
     <>
-      <section className="pink_container">
+      <section className="pink_container pattern">
         <h1 className="heading">
           Pitch Your Startup, <br />
           Connect with Entrepreneures

@@ -321,16 +321,18 @@ yc-directory/
 
 ---
 
-## Deployment
+## In Progress Work!!!
+
+<!-- ## Deployment
 
 - Deployed on **Vercel** with environment variables configured.
 - TypeScript and ESLint build errors ignored for smooth deployment.
 - CORS and OAuth redirect URLs configured for production.
 - Sentry integrated for real-time error monitoring and user feedback.
 
----
+--- -->
 
-## Contributing
+<!-- ## Contributing
 
 1. Fork the repository
 2. Create a feature branch: `git checkout -b feature/new-feature`
@@ -344,6 +346,6 @@ yc-directory/
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
----
+--- -->
 
 **Built with ❤️ using Next.js 15, React 19, and Sanity CMS**
