@@ -2,9 +2,10 @@ import Image from "next/image";
 import styles from "./page.module.css";
 import Searchform from "@/components/Searchform";
 import StartupCard, { StartupTypeCard } from "@/components/StartupCard";
-import { client } from "@/sanity/lib/client";
+
 import { STARTUPS_QUERY } from "@/lib/queries";
 import { Startup } from "@/sanity/types";
+import { sanityFetch, SanityLive } from "@/sanity/lib/live";
 
 export default async function Home({searchParams} :{
   searchParams :Promise<{query?:string}>
@@ -12,10 +13,11 @@ export default async function Home({searchParams} :{
 
   const query = (await searchParams).query
 
-  const posts = await client.fetch(STARTUPS_QUERY);
+  // const posts = await client.fetch(STARTUPS_QUERY);
 
+  const {data:posts} = await sanityFetch({query:STARTUPS_QUERY})
 
-  console.log(JSON.stringify(posts, null, 2));
+  // console.log(JSON.stringify(posts, null, 2));
   // const posts = [
   //   {
   //     _createdAt: new Date(),
@@ -61,6 +63,7 @@ export default async function Home({searchParams} :{
           )}
         </ul>
       </section>
+      <SanityLive/>
     </>
   );
 }
