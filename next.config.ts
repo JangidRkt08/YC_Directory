@@ -13,7 +13,8 @@ const nextConfig: NextConfig = {
     ]
   },
   experimental: {
-    // ppr: "incremental",
+    // ppr: true,
+    // after: true
   },
   devIndicators: {
     buildActivity: true,

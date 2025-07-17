@@ -2,8 +2,8 @@ import Image from "next/image";
 import styles from "./page.module.css";
 import Searchform from "@/components/Searchform";
 import StartupCard, { StartupTypeCard } from "@/components/StartupCard";
-
-import { STARTUPS_QUERY } from "@/lib/queries";
+import {auth} from "@/auth"
+import { STARTUPS_QUERY } from "@/sanity/lib/queries";
 import { Startup } from "@/sanity/types";
 import { sanityFetch, SanityLive } from "@/sanity/lib/live";
 
@@ -16,6 +16,11 @@ export default async function Home({searchParams} :{
   const params ={
     search:query || null
   }
+
+  const session = await auth();
+
+  // console.log(session?.id); 
+  
 
   // const posts = await client.fetch(STARTUPS_QUERY);
 
