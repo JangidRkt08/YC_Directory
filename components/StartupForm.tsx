@@ -47,7 +47,7 @@ const heandleFormSubmit =async (prevState: any, formData:FormData)=>{
         description: "Your startup pitch has been created successfully",
         
       })
-      router.push(`startup/${result._id}`)
+      router.back()
     }
     
   }catch(error){

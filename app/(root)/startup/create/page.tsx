@@ -8,7 +8,7 @@ const page = async() => {
     const session = await auth();
 
     if (!session) {
-      return redirect("/login");
+      return redirect("/");
     }
 
   return (
