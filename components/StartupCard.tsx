@@ -53,7 +53,7 @@ const StartupCard = ({ post }: { post: StartupTypeCard }) => {
         <p className="startup-card_desc">
           {description}
         </p>
-        <img src={image} alt="placeholder" className="startup-card_img" />
+        <Image src={image || "/placeholder.png"} width={500} height={500} alt="placeholder" className="startup-card_img" />
       </Link>
 
       <div className="flex-between gap-3 mt-5">
