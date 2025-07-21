@@ -65,7 +65,7 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
               href={`/user/${post.author?._id}`}
               className="flex gap-2 items-center mb-3"
             >
-              <img
+              <Image
                 src={post.author?.image}
                 alt="avatar"
                 width={60}

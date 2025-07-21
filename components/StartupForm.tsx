@@ -1,6 +1,6 @@
 "use client";
 
-import React, { use, useState } from "react";
+import React, { useState } from "react";
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
 import MDEditor from "@uiw/react-md-editor"
@@ -15,7 +15,18 @@ import { createPitch } from "@/lib/actions";
 
 
 
-
+type FormState = {
+ error: string;
+  status: string;
+  message: string;
+  errors?: {
+    title?: string[];
+    description?: string[];
+    category?: string[];
+    link?: string[];
+    pitch?: string[];
+  };
+};   
 
 const StartupForm = () => {
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -23,9 +34,12 @@ const StartupForm = () => {
   const { toast } = useToast();
 
   const router = useRouter()
-const heandleFormSubmit =async (prevState: any, formData:FormData)=>{
-  try{
-    const formvalues ={
+const heandleFormSubmit = async (
+  prevState: FormState | undefined,
+  formData: FormData
+) => {
+  try {
+    const formvalues = {
       title: formData.get("title") as string,
       description: formData.get("description") as string,
       category: formData.get("category") as string,
@@ -38,7 +52,11 @@ const heandleFormSubmit =async (prevState: any, formData:FormData)=>{
     
 
 
-    const result = await createPitch(prevState,formData,pitch)
+    const result = await createPitch(
+      prevState ?? { error: "", status: "INITIAL", message: "", errors: {} },
+      formData,
+      pitch
+    )
     // console.log(result);
 
     if(result.status === "SUCCESS"){
@@ -65,8 +83,9 @@ const heandleFormSubmit =async (prevState: any, formData:FormData)=>{
 
       return {
         ...prevState,
-        error: "Validation Error",
-        status: "ERROR",
+  error: "Unexpected error",
+  status: "ERROR",
+  message: "Unexpected error",
       }
     }
 
@@ -79,8 +98,9 @@ const heandleFormSubmit =async (prevState: any, formData:FormData)=>{
 
     return {
       ...prevState,
-      error: "an Unexppected error occured",
-      status: "ERROR",
+  error: "Unexpected error",
+  status: "ERROR",
+  message: "Unexpected error",
     }
 
    
@@ -90,8 +110,10 @@ const heandleFormSubmit =async (prevState: any, formData:FormData)=>{
 
 
 
-const [state,formAction,isPending] =useActionState(heandleFormSubmit,{   error: "",
+const [,formAction,isPending] =useActionState(heandleFormSubmit,{   error: "",
     status: "INITIAL",
+    message: "",
+    errors: {},
   })
 
 

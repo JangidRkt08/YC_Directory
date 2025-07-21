@@ -9,30 +9,40 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   callbacks: {
     async signIn({
       user,
+      account,
       profile,
+      email,
+      credentials,
     }: {
-      user: { name: string; email: string; image?: string };
-      profile: { id: string; login: string; bio?: string };
+      user: import("next-auth").User;
+      account?: import("next-auth").Account | null;
+      profile?: import("next-auth").Profile;
+      email?: { verificationRequest?: boolean };
+      credentials?: Record<string, unknown>;
     }) {
-      const { name, email, image } = user;
-      const { id, login, bio } = profile;
-      const existingUser = await client.withConfig({useCdn: false}).fetch(AUTHOR_BY_GITHUB_ID_QUERY, {
+      const name = user.name ?? "";
+      const emailAddr = user.email ?? "";
+      const image = user.image ?? "";
+      // profile.id can be string | null | undefined, so fallback to empty string if null
+      const id = typeof profile?.id === "string" ? profile.id : "";
+      const login = profile?.login ?? "";
+      const bio = profile?.bio ?? "";
+
+      const existingUser = await client.withConfig({ useCdn: false }).fetch(AUTHOR_BY_GITHUB_ID_QUERY, {
         id,
-      })
-      if(!existingUser){
+      });
+      if (!existingUser) {
         await writeClient.create({
-           _type: "author",
+          _type: "author",
           id,
           name,
           username: login,
-          email,
+          email: emailAddr,
           image,
-          bio: bio || "",
-        })
+          bio,
+        });
       }
-      return true
-
-
+      return true;
     },
 
      async jwt({ token, account, profile }: { token: any; account?: any; profile?: any }) {
