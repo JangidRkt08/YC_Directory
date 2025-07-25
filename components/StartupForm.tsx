@@ -12,8 +12,8 @@ import { z } from "zod";
 import { useToast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";
 import { createPitch } from "@/lib/actions";
-import { route } from "sanity/router";
 
+export const revalidate = 8
 
 
 type FormState = {
