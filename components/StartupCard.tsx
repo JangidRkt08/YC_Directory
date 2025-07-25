@@ -12,6 +12,8 @@ export type StartupTypeCard = Omit<Startup, "author"> & {
   
 }
 
+// export const revalidate = 5
+
 const StartupCard = ({ post }: { post: StartupTypeCard }) => {
   const {
     _createdAt,
