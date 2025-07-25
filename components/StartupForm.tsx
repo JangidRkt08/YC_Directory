@@ -12,6 +12,7 @@ import { z } from "zod";
 import { useToast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";
 import { createPitch } from "@/lib/actions";
+import { route } from "sanity/router";
 
 
 
@@ -45,29 +46,26 @@ const heandleFormSubmit = async (
       category: formData.get("category") as string,
       link: formData.get("link") as string,
       pitch,
-    }
+    };
 
-    await formSchema.parseAsync(formvalues)
-    console.log(formvalues);
-    
-
+    await formSchema.parseAsync(formvalues);
+    // console.log(formvalues);
 
     const result = await createPitch(
       prevState ?? { error: "", status: "INITIAL", message: "", errors: {} },
       formData,
       pitch
-    )
+    );
     // console.log(result);
 
-    if(result.status === "SUCCESS"){
+    if (result.status === "SUCCESS") {
       toast({
         title: "Success",
         description: "Your startup pitch has been created successfully",
-        
-      })
-      router.back()
+      });
+      // router.back()
+      router.push(`/startup/${result._id}`);
     }
-    
   }catch(error){
     if(error instanceof z.ZodError){
       const fieldErrors = error.flatten().fieldErrors;
