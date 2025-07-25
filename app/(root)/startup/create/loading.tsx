@@ -1,4 +1,4 @@
-// app/startup/create/loading.tsx
+
 export default function Loading() {
   return (
     <section className="p-6 space-y-6 animate-pulse max-w-3xl mx-auto">
