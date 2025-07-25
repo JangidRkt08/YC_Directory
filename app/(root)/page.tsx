@@ -1,10 +1,7 @@
-// import Image from "next/image";
-// import styles from "./page.module.css";
+
 import Searchform from "@/components/Searchform";
 import StartupCard, { StartupTypeCard } from "@/components/StartupCard";
-// import {auth} from "@/auth"
 import { STARTUPS_QUERY } from "@/sanity/lib/queries";
-// import { Startup } from "@/sanity/types";
 import { sanityFetch, SanityLive } from "@/sanity/lib/live";
 
 export default async function Home({searchParams} :{
